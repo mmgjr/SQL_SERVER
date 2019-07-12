@@ -1,0 +1,54 @@
+
+Banco de Dados do Sistema
+
+master: Banco principal do sistema. Todas as informações dos bancos de dados ficam armazenadas no banco de dados master.
+
+model: serve de referência quando criar um banco de dados. Ex: se eu crio uma tabela A. O próxima banco que eu criar, pegará a referência dessa tabela A já criada no banco model.
+
+msdb: serviços. Exe: agendamento de back-up,rotinas,dados do integration services,etc.
+Ferramenta ETL(extração,transformação e carga)- também ficam armazenados no msdb.
+
+tempdb: banco temporário. São apagados quando encerra o programa.Normalmente são banco ou tabelas de teste e algumas views.
+
+ReportServe e ReportServeTemp- banco de relatórios.Ambos trabalham em conjunto para balancear os acessos às tabelas.
+
+
+SQLServe tem o processamento Assíncrono.
+
+Delimitador do SQLServer: GO
+
+O GO quebra as instruções em pacotes.Assim, o servidor de banco de dados recebe os pacotes na ordem correta.
+
+Arquitetura
+partição de HD
+1-para o sistema;
+2-Programa SQL Server;
+3-arquivos mdf e ldf
+
+OBS: essa divisão é feita para melhorar a performace.
+
+Arquivos mdf(MASTER DATA FILE) e ldf(LOG DATA FILE).
+
+Arquivo de LOG armazena as transações feita no banco.
+BEGIN
+o código
+COMMIT
+ROLLBACK-> você consegue voltar no que foi feito.
+
+Recomendação da Microsoft é deixar MDF apenas para dados do sistema.
+
+NDF é recomendado para dados de banco. Divididos em grupos.Ex:Go1,Go2,Go3...
+
+LDF para controle dos dados. 
+
+
+
+DBO SCHEMA
+Divisor lógico de banco de dados. Tudo o que for criado no banco deve possuir um dono.
+Se você criar algo sem especificar quem é o dono, ele vai para o DBO(Database Owner) dono da base.
+
+SCHEMA são como pastas no banco de dados
+se eu tenho um schema chamado MKT e crio uma tabela da seguinte forma: CREATE TABLE MKT.CAMPANHA
+Essa tabela vai para o SCHEMA MKT 
+
+
